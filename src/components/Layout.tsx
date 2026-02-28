@@ -6,49 +6,49 @@ export const Layout = () => {
   const location = useLocation();
 
   return (
-    <div className="min-h-screen p-4 md:p-6 lg:p-8 flex flex-col gap-10 max-w-[1280px] mx-auto">
-      {/* Header */}
-      <header className="flex items-center justify-between px-8 py-5 bg-brand-white rounded-[20px] border-2 border-brand-orange shadow-xl relative z-20">
-        <Link to="/" className="flex items-center gap-3">
+    <div className="min-h-screen w-full overflow-x-hidden flex flex-col px-[1%] gap-[10px] py-[10px]">
+      {/* Navigation Frame (Sticky) */}
+      <nav className="sticky top-[10px] z-50 flex items-center justify-between px-8 py-5 bg-brand-white rounded-[20px] border-2 border-brand-orange shadow-md">
+        <Link to="/" className="flex items-center gap-[11.4px]">
           <StratonLogo className="w-8 h-8" />
           <span className="text-2xl font-bold tracking-tight text-[#111111]">Straton AI</span>
         </Link>
         
-        <nav className="hidden md:flex items-center gap-16 text-xs font-semibold tracking-widest uppercase text-[#111111]">
-          <Link to="/" className={`flex items-center gap-2 hover:text-brand-orange transition-colors ${location.pathname === '/' ? 'text-[#111111]' : 'text-[#6E6E6E]'}`}>
+        <div className="hidden md:flex items-center gap-[60.8px] text-xs font-semibold tracking-widest uppercase text-[#111111]">
+          <Link to="/" className={`flex items-center gap-[7.6px] hover:text-brand-orange transition-colors ${location.pathname === '/' ? 'text-[#111111]' : 'text-[#6E6E6E]'}`}>
             {location.pathname === '/' && <div className="w-2 h-2 bg-[#8B5CF6]" />}
             HOME
           </Link>
-          <Link to="/about" className={`flex items-center gap-2 hover:text-brand-orange transition-colors ${location.pathname === '/about' ? 'text-[#111111]' : 'text-[#6E6E6E]'}`}>
+          <Link to="/about" className={`flex items-center gap-[7.6px] hover:text-brand-orange transition-colors ${location.pathname === '/about' ? 'text-[#111111]' : 'text-[#6E6E6E]'}`}>
             {location.pathname === '/about' && <div className="w-2 h-2 bg-[#8B5CF6]" />}
             ABOUT US
           </Link>
-          <Link to="/contact" className={`flex items-center gap-2 hover:text-brand-orange transition-colors ${location.pathname === '/contact' ? 'text-[#111111]' : 'text-[#6E6E6E]'}`}>
+          <Link to="/contact" className={`flex items-center gap-[7.6px] hover:text-brand-orange transition-colors ${location.pathname === '/contact' ? 'text-[#111111]' : 'text-[#6E6E6E]'}`}>
             {location.pathname === '/contact' && <div className="w-2 h-2 bg-[#8B5CF6]" />}
             CONTACT US
           </Link>
-        </nav>
+        </div>
 
-        <button className="flex items-center gap-4 text-xs font-bold tracking-widest uppercase group text-[#111111]">
+        <button className="flex items-center gap-[15.2px] text-xs font-bold tracking-widest uppercase group text-[#111111]">
           <div className="bg-brand-orange text-white p-2.5 rounded-sm group-hover:bg-[#e03a1f] transition-colors">
             <ArrowUpRight className="w-4 h-4" />
           </div>
           TALK TO AN AI EXPERT
         </button>
-      </header>
+      </nav>
 
       {/* Page Content */}
-      <main className="flex flex-col gap-10">
+      <main className="flex flex-col w-full">
         <Outlet />
       </main>
 
-      {/* Footer */}
+      {/* Footer Frame */}
       <footer className="bg-[#1A0905] text-white pt-20 pb-8 px-12 md:px-20 rounded-[20px] border-2 border-brand-orange shadow-2xl">
         <div className="flex flex-col md:flex-row justify-between items-start mb-24">
-          <div className="flex flex-col md:flex-row gap-16 md:gap-32">
+          <div className="flex flex-col md:flex-row gap-[60.8px] md:gap-[121.6px]">
             <div>
               <h4 className="text-[10px] text-white/50 tracking-widest uppercase mb-6">PAGES</h4>
-              <ul className="space-y-4 text-sm font-medium">
+              <ul className="space-y-[15.2px] text-sm font-medium">
                 <li><Link to="/" className={`hover:text-brand-orange transition-colors ${location.pathname === '/' ? 'text-brand-orange' : ''}`}>Home</Link></li>
                 <li><Link to="/about" className={`hover:text-brand-orange transition-colors ${location.pathname === '/about' ? 'text-brand-orange' : ''}`}>About Us</Link></li>
                 <li><Link to="/contact" className={`hover:text-brand-orange transition-colors ${location.pathname === '/contact' ? 'text-brand-orange' : ''}`}>Contact Us</Link></li>
@@ -56,7 +56,7 @@ export const Layout = () => {
             </div>
             <div>
               <h4 className="text-[10px] text-white/50 tracking-widest uppercase mb-6">SOCIALS</h4>
-              <ul className="space-y-4 text-sm font-medium">
+              <ul className="space-y-[15.2px] text-sm font-medium">
                 <li><a href="#" className="hover:text-brand-orange transition-colors">LinkedIn</a></li>
                 <li><a href="#" className="hover:text-brand-orange transition-colors">X (Twitter)</a></li>
               </ul>
@@ -76,13 +76,13 @@ export const Layout = () => {
           </div>
         </div>
 
-        <div className="flex flex-col lg:flex-row justify-between items-end gap-12 mb-16">
-          <div className="flex items-center gap-6">
+        <div className="flex flex-col lg:flex-row justify-between items-end gap-[45.6px] mb-16">
+          <div className="flex items-center gap-[22.8px]">
             <StratonLogo className="w-20 h-20 md:w-28 md:h-28" />
             <span className="text-[72px] md:text-[130px] leading-[0.8] font-medium tracking-tighter -mb-2 md:-mb-4">straton</span>
           </div>
 
-          <div className="flex flex-wrap gap-12 text-sm mb-2">
+          <div className="flex flex-wrap gap-[45.6px] text-sm mb-2">
             <div>
               <h4 className="text-[10px] text-white/50 tracking-widest uppercase mb-2">EMAIL</h4>
               <p>hi@straton.ai</p>
@@ -101,7 +101,7 @@ export const Layout = () => {
         <div className="h-[1px] w-full bg-white/20 mb-6"></div>
 
         <div className="flex flex-col md:flex-row justify-between items-center text-[11px] text-white/50">
-          <div className="flex gap-6 mb-4 md:mb-0">
+          <div className="flex gap-[22.8px] mb-4 md:mb-0">
             <a href="#" className="hover:text-white transition-colors">Privacy Policy</a>
             <a href="#" className="hover:text-white transition-colors">Terms of Use</a>
           </div>
