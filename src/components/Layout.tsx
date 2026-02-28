@@ -23,7 +23,10 @@ export const Layout = () => {
             {location.pathname === '/about' && <div className="w-2 h-2 bg-[#8B5CF6]" />}
             ABOUT US
           </Link>
-          <Link to="/contact" className="hover:text-brand-orange transition-colors text-[#6E6E6E]">CONTACT US</Link>
+          <Link to="/contact" className={`flex items-center gap-2 hover:text-brand-orange transition-colors ${location.pathname === '/contact' ? 'text-[#111111]' : 'text-[#6E6E6E]'}`}>
+            {location.pathname === '/contact' && <div className="w-2 h-2 bg-[#8B5CF6]" />}
+            CONTACT US
+          </Link>
         </nav>
 
         <button className="flex items-center gap-4 text-xs font-bold tracking-widest uppercase group text-[#111111]">
@@ -46,9 +49,9 @@ export const Layout = () => {
             <div>
               <h4 className="text-[10px] text-white/50 tracking-widest uppercase mb-6">PAGES</h4>
               <ul className="space-y-4 text-sm font-medium">
-                <li><Link to="/" className="hover:text-brand-orange transition-colors">Home</Link></li>
-                <li><Link to="/about" className="text-brand-orange">About Us</Link></li>
-                <li><Link to="/contact" className="hover:text-brand-orange transition-colors">Contact Us</Link></li>
+                <li><Link to="/" className={`hover:text-brand-orange transition-colors ${location.pathname === '/' ? 'text-brand-orange' : ''}`}>Home</Link></li>
+                <li><Link to="/about" className={`hover:text-brand-orange transition-colors ${location.pathname === '/about' ? 'text-brand-orange' : ''}`}>About Us</Link></li>
+                <li><Link to="/contact" className={`hover:text-brand-orange transition-colors ${location.pathname === '/contact' ? 'text-brand-orange' : ''}`}>Contact Us</Link></li>
               </ul>
             </div>
             <div>
