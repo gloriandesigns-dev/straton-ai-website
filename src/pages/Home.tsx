@@ -1,10 +1,57 @@
-import React from 'react';
-import { ArrowLeft, ArrowRight } from '../components/Icons';
-import { HeroCubes, BFSICubes, CardCube } from '../components/IsometricCubes';
+import React, { useState } from 'react';
+import { ArrowLeft, ArrowRight, ArrowUpRight } from '../components/Icons';
+import { HeroCubes, CardCube } from '../components/IsometricCubes';
 import { CTASectionContent } from '../components/CTASection';
 import { FrameContainer, FrameData } from '../components/FrameContainer';
 
+// Define TypeScript interface for scalability
+interface BfsiFeature {
+  title: string;
+  image: string;
+}
+
 export const Home = () => {
+  const bfsiItems: BfsiFeature[] = [
+    {
+      title: 'Risk & Compliance',
+      image: 'https://www.dropbox.com/scl/fi/qop296bq2jrjvbee9vsnl/Screenshot-2026-03-01-000025.webp?rlkey=uokb1cmd5afbqle5d9feawt7g&st=9x6vc2hx&raw=1'
+    },
+    {
+      title: 'Customer Experience',
+      image: 'https://www.dropbox.com/scl/fi/4ar5uz8z2vpyetsigifks/Screenshot-2026-02-28-235940.webp?rlkey=ioakitje33jglwbqn5auv3eth&st=hr5cdxex&raw=1'
+    },
+    {
+      title: 'Operational Efficiency',
+      image: 'https://www.dropbox.com/scl/fi/3ekz5tnp4bbxj4wfgfd50/Screenshot-2026-03-01-000036.webp?rlkey=sm2vb8pd9efl1mjfknra11qme&st=igld0r4g&raw=1'
+    }
+  ];
+
+  // Explicitly set the initial state to the first item (Risk & Compliance)
+  const [activeBfsi, setActiveBfsi] = useState<string>(bfsiItems[0].title);
+
+  const opportunitiesData = [
+    {
+      title: 'SALES ACCELERATION & LEAD QUALIFICATION',
+      desc: 'Identify and prioritize high-value prospects instantly with predictive AI models.',
+      bullets: ['Predictive lead scoring', 'Automated email sequences', 'Intent signaling']
+    },
+    {
+      title: 'CUSTOMER ENGAGEMENT & SERVICE',
+      desc: 'Deliver personalized, 24/7 support at scale without compromising quality.',
+      bullets: ['Conversational AI agents', 'Sentiment analysis', 'Omnichannel routing']
+    },
+    {
+      title: 'DOCUMENT PROCESSING & MANAGEMENT',
+      desc: 'Extract and organize unstructured data seamlessly from complex documents.',
+      bullets: ['Automated OCR extraction', 'Contract analysis', 'Compliance checking']
+    },
+    {
+      title: 'INTELLIGENT ASSISTANTS & COPILOTS',
+      desc: 'Empower your workforce with AI-driven insights and workflow automation.',
+      bullets: ['Workflow automation', 'Knowledge retrieval', 'Decision support']
+    }
+  ];
+
   const frames: FrameData[] = [
     {
       id: 'hero',
@@ -36,28 +83,51 @@ export const Home = () => {
     },
     {
       id: 'bfsi',
-      className: 'bg-[#1A0905] flex flex-col lg:flex-row',
+      className: 'bg-[#1A0905] flex flex-col lg:flex-row overflow-hidden',
       content: (
         <>
-          <div className="lg:w-1/2 p-12 md:p-20 border-b lg:border-b-0 lg:border-r border-white/10">
-            <h2 className="text-3xl md:text-4xl font-medium text-white mb-12 leading-[1.2]">
+          <div className="lg:w-1/2 p-12 md:p-20 border-b lg:border-b-0 lg:border-r border-white/10 relative z-10 bg-[#1A0905] flex flex-col justify-center">
+            <h2 className="text-3xl md:text-4xl font-medium text-white mb-6 leading-[1.2]">
               We build AI that understands the nuances of Banking, Financial Services, and Insurance.
             </h2>
             
-            <div className="space-y-[22.8px]">
-              {['Risk & Compliance', 'Customer Experience', 'Operational Efficiency'].map((item, i) => (
-                <div key={i} className="border-b border-white/10 pb-6 group cursor-pointer">
-                  <div className="flex items-center justify-between text-white/70 group-hover:text-brand-orange transition-colors">
-                    <span className="text-lg font-medium">{item}</span>
-                    <ArrowRight className="w-5 h-5 opacity-0 group-hover:opacity-100 transition-opacity" />
+            <p className="text-white/70 mb-12 text-sm md:text-base leading-relaxed max-w-lg">
+              Our domain-specific models are trained on industry data to ensure compliance, enhance customer journeys, and streamline complex operations from day one.
+            </p>
+            
+            <div className="space-y-[22.8px] mb-12">
+              {bfsiItems.map((item, i) => (
+                <div 
+                  key={i} 
+                  className="border-b border-white/10 pb-6 group cursor-pointer"
+                  onMouseEnter={() => setActiveBfsi(item.title)}
+                >
+                  <div className={`flex items-center justify-between transition-colors ${activeBfsi === item.title ? 'text-brand-orange' : 'text-white/70 group-hover:text-brand-orange'}`}>
+                    <span className="text-lg font-medium">{item.title}</span>
+                    <ArrowRight className={`w-5 h-5 transition-opacity ${activeBfsi === item.title ? 'opacity-100' : 'opacity-0 group-hover:opacity-100'}`} />
                   </div>
                 </div>
               ))}
             </div>
+
+            <button className="flex items-center gap-[15.2px] text-xs font-bold tracking-widest uppercase group text-white w-fit">
+              <div className="bg-brand-orange text-white p-2.5 rounded-sm group-hover:bg-[#e03a1f] transition-colors">
+                <ArrowUpRight className="w-4 h-4" />
+              </div>
+              EXPLORE OUR SOLUTIONS
+            </button>
           </div>
           
-          <div className="lg:w-1/2 bg-[#2A0F08] relative min-h-[400px] flex items-center justify-center p-12">
-            <BFSICubes />
+          <div className="lg:w-1/2 bg-[#2A0F08] relative min-h-[400px] flex items-center justify-center p-12 overflow-hidden">
+            {/* Hover Images with smooth opacity transitions */}
+            {bfsiItems.map((item, i) => (
+              <img
+                key={i}
+                src={item.image}
+                alt={`${item.title} visualization for BFSI industry`}
+                className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ease-in-out ${activeBfsi === item.title ? 'opacity-100 z-20' : 'opacity-0 z-0'}`}
+              />
+            ))}
           </div>
         </>
       )
@@ -132,27 +202,55 @@ export const Home = () => {
           </h2>
           
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-[22.8px]">
-            {[
-              'SALES ACCELERATION & LEAD QUALIFICATION',
-              'CUSTOMER ENGAGEMENT & SERVICE',
-              'DOCUMENT PROCESSING & MANAGEMENT',
-              'INTELLIGENT ASSISTANTS & COPILOTS'
-            ].map((title, i) => (
+            {opportunitiesData.map((opp, i) => (
               <div 
                 key={i} 
-                className="bg-[#2A0F08] border border-[#FF4D2E]/20 rounded-[18px] p-8 flex flex-col justify-between min-h-[420px] hover:-translate-y-1 hover:shadow-[0_0_20px_rgba(255,77,46,0.15)] transition-all duration-300 cursor-pointer group"
+                className="relative bg-[#2A0F08] border border-[#FF4D2E]/20 rounded-[18px] flex flex-col min-h-[420px] hover:-translate-y-1 hover:shadow-[0_0_20px_rgba(255,77,46,0.15)] transition-all duration-300 cursor-pointer group overflow-hidden"
               >
-                <h3 className="text-sm tracking-widest uppercase font-semibold text-white/90 leading-relaxed">
-                  {title}
-                </h3>
-                
-                <div className="mt-auto flex justify-center w-full">
-                  <div className="relative px-6 py-3 text-[10px] tracking-[0.2em] uppercase text-white/50 group-hover:text-white transition-colors">
-                    <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-brand-orange"></div>
-                    <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-brand-orange"></div>
-                    <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-brand-orange"></div>
-                    <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-brand-orange"></div>
-                    HOVER TO KNOW MORE
+                {/* Base Content (Fades out on hover) */}
+                <div className="absolute inset-0 p-8 flex flex-col justify-between z-10 transition-opacity duration-300 group-hover:opacity-0">
+                  <h3 className="text-sm tracking-widest uppercase font-semibold text-white/90 leading-relaxed">
+                    {opp.title}
+                  </h3>
+                  
+                  <div className="mt-auto flex justify-center w-full">
+                    <div className="relative px-6 py-3 text-[10px] tracking-[0.2em] uppercase text-white/50 transition-colors">
+                      <div className="absolute top-0 left-0 w-2 h-2 border-t border-l border-brand-orange"></div>
+                      <div className="absolute top-0 right-0 w-2 h-2 border-t border-r border-brand-orange"></div>
+                      <div className="absolute bottom-0 left-0 w-2 h-2 border-b border-l border-brand-orange"></div>
+                      <div className="absolute bottom-0 right-0 w-2 h-2 border-b border-r border-brand-orange"></div>
+                      HOVER TO KNOW MORE
+                    </div>
+                  </div>
+                </div>
+
+                {/* Hover Background Fill Layer */}
+                <div className="absolute bottom-0 left-0 w-full bg-[#FF4D2E] z-20 h-0 transition-[height] duration-[350ms] ease-in group-hover:h-full group-hover:duration-[450ms] group-hover:ease-[cubic-bezier(0.4,0,0.2,1)] will-change-[height]"></div>
+
+                {/* Hover Content Layer (Fades in sequentially) */}
+                <div className="absolute inset-0 p-8 flex flex-col z-30 pointer-events-none">
+                  <h3 className="text-sm tracking-widest uppercase font-semibold text-white leading-relaxed opacity-0 translate-y-[8px] transition-all duration-[200ms] ease-in delay-0 group-hover:opacity-100 group-hover:translate-y-0 group-hover:duration-[350ms] group-hover:ease-out group-hover:delay-[150ms] will-change-[opacity,transform]">
+                    {opp.title}
+                  </h3>
+                  
+                  <p className="mt-4 text-white/90 text-sm opacity-0 translate-y-[8px] transition-all duration-[200ms] ease-in delay-0 group-hover:opacity-100 group-hover:translate-y-0 group-hover:duration-[350ms] group-hover:ease-out group-hover:delay-[250ms] will-change-[opacity,transform]">
+                    {opp.desc}
+                  </p>
+                  
+                  <ul className="mt-6 space-y-3">
+                    {opp.bullets.map((b, j) => {
+                      const delays = ['group-hover:delay-[330ms]', 'group-hover:delay-[410ms]', 'group-hover:delay-[490ms]'];
+                      return (
+                        <li key={j} className={`flex items-center gap-3 text-white text-sm opacity-0 translate-y-[8px] transition-all duration-[200ms] ease-in delay-0 group-hover:opacity-100 group-hover:translate-y-0 group-hover:duration-[300ms] group-hover:ease-out ${delays[j]} will-change-[opacity,transform]`}>
+                          <div className="w-1.5 h-1.5 bg-white rounded-full shrink-0"></div>
+                          {b}
+                        </li>
+                      );
+                    })}
+                  </ul>
+
+                  <div className="mt-auto flex items-center gap-2 text-white text-xs font-bold tracking-widest uppercase opacity-0 transition-opacity duration-[200ms] ease-in delay-0 group-hover:opacity-100 group-hover:duration-[300ms] group-hover:delay-[400ms] will-change-[opacity]">
+                    EXPLORE <ArrowUpRight className="w-4 h-4" />
                   </div>
                 </div>
               </div>
