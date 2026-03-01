@@ -1,7 +1,6 @@
 import React from 'react';
 import { Linkedin } from 'lucide-react';
 import { StratonLogo } from '../components/Icons';
-import { PurpleCardCubes } from '../components/PurpleCardCubes';
 import { CTASectionContent } from '../components/CTASection';
 import { FrameContainer, FrameData } from '../components/FrameContainer';
 
@@ -9,10 +8,15 @@ export const About = () => {
   const frames: FrameData[] = [
     {
       id: 'business-statement',
-      className: 'relative bg-[#1A0905] p-16 md:p-32 flex items-center justify-center',
+      className: 'relative bg-[#1A0905] p-16 md:p-32 flex items-center justify-center overflow-hidden',
       content: (
         <>
-          <div className="absolute inset-0 bg-dotted-grid opacity-20"></div>
+          <img 
+            src="https://www.dropbox.com/scl/fi/a7cm1eaws9t5pesc1vr5l/Screenshot-2026-02-28-235957.webp?rlkey=4y2hiulv2opkk3ay7udzy16a7&st=8h1cz7i0&raw=1" 
+            alt="Background Texture" 
+            className="absolute inset-0 w-full h-full object-cover opacity-30 z-0 mix-blend-overlay"
+          />
+          <div className="absolute inset-0 bg-dotted-grid opacity-20 z-0"></div>
           <div className="relative z-10 max-w-4xl mx-auto text-center p-10">
             <div className="absolute top-0 left-0 w-6 h-6 border-t-[1.5px] border-l-[1.5px] border-brand-orange"></div>
             <div className="absolute top-0 right-0 w-6 h-6 border-t-[1.5px] border-r-[1.5px] border-brand-orange"></div>
@@ -39,29 +43,31 @@ export const About = () => {
               {
                 title: "BUSINESS-FIRST ALIGNMENT",
                 points: ["Understanding your business, its tech stack and the workflow", "Problem discovery", "Identify opportunities for impact"],
-                type: 1
+                image: "https://www.dropbox.com/scl/fi/qg354gff2v4j8ckvessxo/693ffc4b094bb7d685c5fe02_Business.svg?rlkey=z9338w9noinm41rvicb9mptim&st=57epxt7g&raw=1"
               },
               {
                 title: "CO-CREATION",
                 points: ["Solutions designed with you in the picture", "Defining clear success metrics of implementation"],
-                type: 2
+                image: "https://www.dropbox.com/scl/fi/n7zn6tgvc9tg8updvx1lh/693ffc4b4451a568c8bffe02_Measuring.svg?rlkey=ykj1rtw5olcqbgq0e87spda6f&st=2p66m3u0&raw=1"
               },
               {
                 title: "ENGINEERING & SHIPPING",
                 points: ["Build, test and deploy in rapid cycles for faster continuous feedback loops", "From implementation to training, we design to handover with perfection"],
-                type: 3
+                image: "https://www.dropbox.com/scl/fi/z30nqaan0mx6rx5natgko/693ffc4bbd3dc8470212a328_Co-creation.svg?rlkey=7xt5ch39nuif6zp6dl2c1i89v&st=uo4c76yf&raw=1"
               },
               {
                 title: "MEASURING & OPTIMIZING",
                 points: ["We measure the impact of the solution on your business", "Continuous optimise for performance and ROI"],
-                type: 4
+                image: "https://www.dropbox.com/scl/fi/tz40nnj2gi9cwyabhamze/693ffc4b8702afc0fa1c9784_Engineering.svg?rlkey=qqlz9q6kr4it0vlcuwozizlt4&st=3fd3h4hn&raw=1"
               }
             ].map((card, i) => (
               <div key={i} className="bg-[#6B46C1] rounded-[18px] p-8 relative overflow-hidden flex flex-col hover:-translate-y-1 transition-transform duration-300">
                 <div className="absolute inset-3 border border-dashed border-brand-orange/40 rounded-[10px] pointer-events-none"></div>
                 <div className="relative z-10 flex-1 flex flex-col">
-                  <PurpleCardCubes type={card.type as 1|2|3|4} />
-                  <h3 className="text-white text-sm tracking-widest uppercase font-semibold mt-8 mb-6">
+                  <div className="w-full h-32 flex items-center justify-center mb-4">
+                    <img src={card.image} alt={card.title} className="w-full h-full object-contain drop-shadow-xl" />
+                  </div>
+                  <h3 className="text-white text-sm tracking-widest uppercase font-semibold mt-4 mb-6">
                     {card.title}
                   </h3>
                   <ul className="space-y-[15.2px] mt-auto">
@@ -87,7 +93,7 @@ export const About = () => {
           <div className="w-full lg:w-1/2 bg-[#F3F3F3] rounded-[20px] overflow-hidden flex flex-col sm:flex-row">
             <div className="sm:w-2/5 relative">
               <img 
-                src="https://images.unsplash.com/photo-1556157382-97eda2d62296?q=80&w=800&auto=format&fit=crop" 
+                src="https://www.dropbox.com/scl/fi/p9ona9htpr2c6qft8h6er/cheerful-indian-businessman-smiling-closeup-portrait-jobs-career-campaign_53876-129417.avif?rlkey=jmiavk7q9b7q0tw16f6i630uu&st=a6spdapx&raw=1" 
                 alt="Himanshu Goyal" 
                 className="w-full h-full object-cover min-h-[300px]"
               />
@@ -112,7 +118,7 @@ export const About = () => {
           <div className="w-full lg:w-1/2 bg-[#F3F3F3] rounded-[20px] overflow-hidden flex flex-col sm:flex-row lg:mt-24">
             <div className="sm:w-2/5 relative">
               <img 
-                src="https://images.unsplash.com/photo-1519085360753-af0119f7cbe7?q=80&w=800&auto=format&fit=crop" 
+                src="https://www.dropbox.com/scl/fi/3wez06uak7tih1n3xtv4j/closeup-young-hispanic-man-casuals-studio_662251-600.avif?rlkey=fnwv4h9q1dkdrqfw02dzef0ra&st=lageajxl&raw=1" 
                 alt="Gaurav Mandlecha" 
                 className="w-full h-full object-cover min-h-[300px]"
               />

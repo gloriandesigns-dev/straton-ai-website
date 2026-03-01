@@ -8,7 +8,7 @@ export const Layout = () => {
   return (
     <div className="min-h-screen w-full overflow-x-hidden flex flex-col px-[1%] gap-[10px] py-[10px]">
       {/* Navigation Frame (Sticky) */}
-      <nav className="sticky top-[10px] z-50 flex items-center justify-between px-8 py-5 bg-brand-white rounded-[20px] border-2 border-brand-orange shadow-md">
+      <nav className="sticky top-[10px] z-[100] flex items-center justify-between px-8 py-5 bg-brand-white rounded-[20px] border-2 border-brand-orange shadow-md bg-white">
         <Link to="/" className="flex items-center gap-[11.4px]">
           <StratonLogo className="w-8 h-8" />
           <span className="text-2xl font-bold tracking-tight text-[#111111]">Straton AI</span>
@@ -29,21 +29,22 @@ export const Layout = () => {
           </Link>
         </div>
 
-        <button className="flex items-center gap-[15.2px] text-xs font-bold tracking-widest uppercase group text-[#111111]">
-          <div className="bg-brand-orange text-white p-2.5 rounded-sm group-hover:bg-[#e03a1f] transition-colors">
+        <button className="relative flex items-center gap-[15.2px] text-xs font-bold tracking-widest uppercase group text-[#111111] hover:text-white transition-colors duration-300 rounded-sm overflow-hidden bg-transparent">
+          <div className="absolute left-0 top-0 bottom-0 w-[36px] bg-brand-orange group-hover:w-full transition-all duration-300 ease-out z-0 rounded-sm"></div>
+          <div className="relative z-10 text-white p-2.5 flex items-center justify-center w-[36px]">
             <ArrowUpRight className="w-4 h-4" />
           </div>
-          TALK TO AN AI EXPERT
+          <span className="relative z-10 pr-4">TALK TO AN AI EXPERT</span>
         </button>
       </nav>
 
       {/* Page Content */}
-      <main className="flex flex-col w-full">
+      <main className="flex flex-col w-full relative z-10">
         <Outlet />
       </main>
 
       {/* Footer Frame */}
-      <footer className="bg-[#1A0905] text-white pt-20 pb-8 px-12 md:px-20 rounded-[20px] border-2 border-brand-orange shadow-2xl">
+      <footer className="bg-[#1A0905] text-white pt-20 pb-8 px-12 md:px-20 rounded-[20px] border-2 border-brand-orange shadow-2xl relative z-10">
         <div className="flex flex-col md:flex-row justify-between items-start mb-24">
           <div className="flex flex-col md:flex-row gap-[60.8px] md:gap-[121.6px]">
             <div>

@@ -42,6 +42,16 @@
   animation: fade-in 600ms ease-in-out forwards;
 }
 
+/* Ticker Animation */
+@keyframes ticker {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.animate-ticker {
+  animation: ticker 30s linear infinite;
+}
+
 /* Hide scrollbar for clean UI but allow scrolling */
 ::-webkit-scrollbar {
   width: 8px;

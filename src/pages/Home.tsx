@@ -4,7 +4,6 @@ import { HeroCubes, CardCube } from '../components/IsometricCubes';
 import { CTASectionContent } from '../components/CTASection';
 import { FrameContainer, FrameData } from '../components/FrameContainer';
 
-// Define TypeScript interface for scalability
 interface BfsiFeature {
   title: string;
   image: string;
@@ -26,8 +25,8 @@ export const Home = () => {
     }
   ];
 
-  // Explicitly set the initial state to the first item (Risk & Compliance)
   const [activeBfsi, setActiveBfsi] = useState<string>(bfsiItems[0].title);
+  const [currentSlide, setCurrentSlide] = useState(0);
 
   const opportunitiesData = [
     {
@@ -52,13 +51,50 @@ export const Home = () => {
     }
   ];
 
+  const tickerLogos = [
+    "https://www.dropbox.com/scl/fi/znk0s5qat7nkryqz6e67z/69394a922f3b8543cf61d719_Meta.webp?rlkey=gbh1wmdizhxuafbjrnglej6f1&st=cjnd6f2m&raw=1",
+    "https://www.dropbox.com/scl/fi/x9x78ik0vwfdikfxvzwxn/69394a927c792072df0161d6_n8n.webp?rlkey=nemiir1q66uz6t56215enz9qv&st=s437opu7&raw=1",
+    "https://www.dropbox.com/scl/fi/mpm3pho7gxrf9ezf9lm4y/69394a9220390d212ed84353_MCP.webp?rlkey=ddra1v5w0xb2umrudkut6cbt1&st=6pvu7pw7&raw=1",
+    "https://www.dropbox.com/scl/fi/4zatepspi24lurik65gq4/69394a92ecfb9355bc15a244_Deepgram.webp?rlkey=pfmpj2osidrqpj8uincnh8h4y&st=sipvombs&raw=1",
+    "https://www.dropbox.com/scl/fi/5if15g67hylj4wbonojvd/69394a929821752bd48b94fe_LangChain.webp?rlkey=ttof9ujs7au3smump0n1y4mvi&st=ia3jy2xu&raw=1",
+    "https://www.dropbox.com/scl/fi/7uu0cswiu8yqs6zlh9igf/69394a927db35245931058ee_elevenlabs.webp?rlkey=r1f1twjfs4fwb33bqkxsc69on&st=9r955ttw&raw=1",
+    "https://www.dropbox.com/scl/fi/vy4xji2xje33ntacym7tp/69394a9214d0c503d4b81de2_Gemini.webp?rlkey=5b9i840w6aop000y5hsznpxy0&st=ltvizn23&raw=1",
+    "https://www.dropbox.com/scl/fi/dfdfeqdsmod7x7iih8gio/69394a922f4a689ff1ee7700_Qwen.webp?rlkey=awovz9hlmzi2gwojg2ivzaeth&st=lrjaqp11&raw=1"
+  ];
+
+  const stratonCards = [
+    {
+      title: "SPEED WITH PURPOSE",
+      desc: "Pre-built, BFSI-focused AI solutions designed to deliver business impact quickly, not just technology.",
+      image: "https://images.unsplash.com/photo-1517649763962-0c623066013b?q=80&w=2070&auto=format&fit=crop"
+    },
+    {
+      title: "MITIGATE RISK WHILST STAYING COMPLIANT",
+      desc: "AI models tested and deployed with accuracy, reliability, and regulatory safeguards, so your operations stay secure.",
+      image: "https://images.unsplash.com/photo-1474487548417-781cb71495f3?q=80&w=2084&auto=format&fit=crop"
+    },
+    {
+      title: "SCALABLE ARCHITECTURE",
+      desc: "Built on robust foundations that grow with your enterprise, ensuring long-term viability and performance.",
+      image: "https://images.unsplash.com/photo-1451187580459-43490279c0fa?q=80&w=2072&auto=format&fit=crop"
+    }
+  ];
+
+  const nextSlide = () => setCurrentSlide((prev) => (prev + 1) % stratonCards.length);
+  const prevSlide = () => setCurrentSlide((prev) => (prev - 1 + stratonCards.length) % stratonCards.length);
+
   const frames: FrameData[] = [
     {
       id: 'hero',
-      className: 'relative bg-[#1A0905] min-h-[600px] flex items-center',
+      className: 'relative bg-[#1A0905] min-h-[600px] flex items-center overflow-hidden',
       content: (
         <>
-          <div className="absolute inset-0 bg-dotted-grid opacity-20"></div>
+          <img 
+            src="https://www.dropbox.com/scl/fi/a7cm1eaws9t5pesc1vr5l/Screenshot-2026-02-28-235957.webp?rlkey=4y2hiulv2opkk3ay7udzy16a7&st=8h1cz7i0&raw=1" 
+            alt="Hero Background" 
+            className="absolute inset-0 w-full h-full object-cover opacity-70 z-0"
+          />
+          <div className="absolute inset-0 bg-dotted-grid opacity-20 z-0"></div>
           <div className="relative z-10 w-full flex flex-col lg:flex-row">
             <div className="lg:w-[55%] p-12 md:p-20 flex flex-col justify-center">
               <h1 className="text-5xl md:text-6xl lg:text-[5rem] font-medium text-white leading-[1.05] tracking-tight">
@@ -119,7 +155,6 @@ export const Home = () => {
           </div>
           
           <div className="lg:w-1/2 bg-[#2A0F08] relative min-h-[400px] flex items-center justify-center p-12 overflow-hidden">
-            {/* Hover Images with smooth opacity transitions */}
             {bfsiItems.map((item, i) => (
               <img
                 key={i}
@@ -128,6 +163,24 @@ export const Home = () => {
                 className={`absolute inset-0 w-full h-full object-cover transition-opacity duration-500 ease-in-out ${activeBfsi === item.title ? 'opacity-100 z-20' : 'opacity-0 z-0'}`}
               />
             ))}
+          </div>
+        </>
+      )
+    },
+    {
+      id: 'ai-stack-ticker',
+      className: 'bg-white p-8 md:p-12 flex flex-col items-center overflow-hidden',
+      content: (
+        <>
+          <h3 className="text-[10px] font-bold tracking-[0.2em] uppercase mb-8 text-[#6E6E6E]">AI STACK</h3>
+          <div className="w-full overflow-hidden relative">
+            <div className="flex w-[200%] animate-ticker items-center">
+              {[...tickerLogos, ...tickerLogos].map((logo, i) => (
+                <div key={i} className="w-1/8 flex justify-center px-8 shrink-0">
+                  <img src={logo} alt="Partner Logo" className="h-8 md:h-12 object-contain grayscale opacity-70 hover:grayscale-0 hover:opacity-100 transition-all" />
+                </div>
+              ))}
+            </div>
           </div>
         </>
       )
@@ -167,10 +220,15 @@ export const Home = () => {
     },
     {
       id: 'gradient-statement',
-      className: 'relative bg-gradient-to-br from-[#FF4D2E] via-[#ff6b52] to-[#ff8f7a] text-white px-12 py-24 md:px-20 md:py-32 animate-gradient',
+      className: 'relative bg-gradient-to-br from-[#FF4D2E] via-[#ff6b52] to-[#ff8f7a] text-white px-12 py-24 md:px-20 md:py-32 animate-gradient overflow-hidden',
       content: (
         <>
-          <div className="absolute inset-0 bg-dotted-grid opacity-40 mix-blend-overlay"></div>
+          <img 
+            src="https://www.dropbox.com/scl/fi/a7cm1eaws9t5pesc1vr5l/Screenshot-2026-02-28-235957.webp?rlkey=4y2hiulv2opkk3ay7udzy16a7&st=8h1cz7i0&raw=1" 
+            alt="Background Texture" 
+            className="absolute inset-0 w-full h-full object-cover opacity-30 z-0 mix-blend-overlay"
+          />
+          <div className="absolute inset-0 bg-dotted-grid opacity-40 mix-blend-overlay z-0"></div>
           <div className="relative z-10 flex flex-col lg:flex-row gap-[60.8px] lg:gap-[91.2px] items-start">
             <div className="flex-1 relative">
               <h2 className="text-6xl md:text-7xl lg:text-[5.5rem] font-medium tracking-tight leading-[1.05]">
@@ -207,7 +265,6 @@ export const Home = () => {
                 key={i} 
                 className="relative bg-[#2A0F08] border border-[#FF4D2E]/20 rounded-[18px] flex flex-col min-h-[420px] hover:-translate-y-1 hover:shadow-[0_0_20px_rgba(255,77,46,0.15)] transition-all duration-300 cursor-pointer group overflow-hidden"
               >
-                {/* Base Content (Fades out on hover) */}
                 <div className="absolute inset-0 p-8 flex flex-col justify-between z-10 transition-opacity duration-300 group-hover:opacity-0">
                   <h3 className="text-sm tracking-widest uppercase font-semibold text-white/90 leading-relaxed">
                     {opp.title}
@@ -224,10 +281,8 @@ export const Home = () => {
                   </div>
                 </div>
 
-                {/* Hover Background Fill Layer */}
                 <div className="absolute bottom-0 left-0 w-full bg-[#FF4D2E] z-20 h-0 transition-[height] duration-[350ms] ease-in group-hover:h-full group-hover:duration-[450ms] group-hover:ease-[cubic-bezier(0.4,0,0.2,1)] will-change-[height]"></div>
 
-                {/* Hover Content Layer (Fades in sequentially) */}
                 <div className="absolute inset-0 p-8 flex flex-col z-30 pointer-events-none">
                   <h3 className="text-sm tracking-widest uppercase font-semibold text-white leading-relaxed opacity-0 translate-y-[8px] transition-all duration-[200ms] ease-in delay-0 group-hover:opacity-100 group-hover:translate-y-0 group-hover:duration-[350ms] group-hover:ease-out group-hover:delay-[150ms] will-change-[opacity,transform]">
                     {opp.title}
@@ -280,36 +335,36 @@ export const Home = () => {
           <div className="grid grid-cols-1 lg:grid-cols-12 gap-[22.8px] mb-12">
             <div className="lg:col-span-8 relative rounded-[20px] overflow-hidden group h-[480px]">
               <img 
-                src="https://images.unsplash.com/photo-1517649763962-0c623066013b?q=80&w=2070&auto=format&fit=crop" 
-                alt="Speed with purpose" 
+                src={stratonCards[currentSlide].image} 
+                alt={stratonCards[currentSlide].title} 
                 className="w-full h-full object-cover grayscale opacity-90 group-hover:scale-[1.03] transition-transform duration-700" 
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
               <div className="absolute bottom-8 left-8 bg-[#111111]/80 backdrop-blur-md p-8 rounded-xl max-w-sm border border-white/10">
                 <div className="flex items-center gap-[11.4px] mb-5">
                   <div className="w-2.5 h-2.5 bg-brand-orange"></div>
-                  <h4 className="text-white text-[11px] font-bold tracking-[0.15em] uppercase">SPEED WITH PURPOSE</h4>
+                  <h4 className="text-white text-[11px] font-bold tracking-[0.15em] uppercase">{stratonCards[currentSlide].title}</h4>
                 </div>
                 <p className="text-white/80 text-sm leading-relaxed font-light">
-                  Pre-built, BFSI-focused AI solutions designed to deliver business impact quickly, not just technology.
+                  {stratonCards[currentSlide].desc}
                 </p>
               </div>
             </div>
             
             <div className="lg:col-span-4 relative rounded-[20px] overflow-hidden group h-[480px]">
               <img 
-                src="https://images.unsplash.com/photo-1474487548417-781cb71495f3?q=80&w=2084&auto=format&fit=crop" 
-                alt="Mitigate risk" 
+                src={stratonCards[(currentSlide + 1) % stratonCards.length].image} 
+                alt={stratonCards[(currentSlide + 1) % stratonCards.length].title} 
                 className="w-full h-full object-cover grayscale opacity-90 group-hover:scale-[1.03] transition-transform duration-700" 
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-transparent to-transparent"></div>
               <div className="absolute bottom-8 left-8 right-8 bg-[#111111]/80 backdrop-blur-md p-8 rounded-xl border border-white/10">
                 <div className="flex items-center gap-[11.4px] mb-5">
                   <div className="w-2.5 h-2.5 bg-brand-orange"></div>
-                  <h4 className="text-white text-[11px] font-bold tracking-[0.15em] uppercase">MITIGATE RISK WHILST STAYING COMPLIANT</h4>
+                  <h4 className="text-white text-[11px] font-bold tracking-[0.15em] uppercase">{stratonCards[(currentSlide + 1) % stratonCards.length].title}</h4>
                 </div>
                 <p className="text-white/80 text-sm leading-relaxed font-light">
-                  AI models tested and deployed with accuracy, reliability, and regulatory safeguards, so your operations stay secure.
+                  {stratonCards[(currentSlide + 1) % stratonCards.length].desc}
                 </p>
               </div>
             </div>
@@ -317,16 +372,15 @@ export const Home = () => {
           
           <div className="flex justify-between items-center">
             <div className="flex gap-[9.5px]">
-              <div className="w-3.5 h-3.5 bg-[#111111]"></div>
-              <div className="w-3.5 h-3.5 bg-[#111111]"></div>
-              <div className="w-3.5 h-3.5 bg-[#111111]"></div>
-              <div className="w-3.5 h-3.5 bg-[#111111]"></div>
+              {stratonCards.map((_, idx) => (
+                <div key={idx} className={`w-3.5 h-3.5 transition-colors ${idx === currentSlide ? 'bg-brand-orange' : 'bg-[#111111]'}`}></div>
+              ))}
             </div>
             <div className="flex gap-[11.4px]">
-              <button className="w-12 h-12 bg-[#FF4D2E]/30 text-[#FF4D2E] flex items-center justify-center hover:bg-[#FF4D2E]/50 transition-colors rounded-sm">
+              <button onClick={prevSlide} className="w-12 h-12 bg-[#FF4D2E]/30 text-[#FF4D2E] flex items-center justify-center hover:bg-[#FF4D2E]/50 transition-colors rounded-sm">
                 <ArrowLeft className="w-5 h-5" />
               </button>
-              <button className="w-12 h-12 bg-[#FF4D2E] text-white flex items-center justify-center hover:bg-[#e03a1f] transition-colors rounded-sm">
+              <button onClick={nextSlide} className="w-12 h-12 bg-[#FF4D2E] text-white flex items-center justify-center hover:bg-[#e03a1f] transition-colors rounded-sm">
                 <ArrowRight className="w-5 h-5" />
               </button>
             </div>
@@ -336,10 +390,15 @@ export const Home = () => {
     },
     {
       id: 'ai-value',
-      className: 'relative bg-[#1A0905] py-32 px-12 md:px-20 flex items-center justify-center',
+      className: 'relative bg-[#1A0905] py-32 px-12 md:px-20 flex items-center justify-center overflow-hidden',
       content: (
         <>
-          <div className="absolute inset-0 bg-dotted-grid opacity-20"></div>
+          <img 
+            src="https://www.dropbox.com/scl/fi/a7cm1eaws9t5pesc1vr5l/Screenshot-2026-02-28-235957.webp?rlkey=4y2hiulv2opkk3ay7udzy16a7&st=8h1cz7i0&raw=1" 
+            alt="Background Texture" 
+            className="absolute inset-0 w-full h-full object-cover opacity-30 z-0 mix-blend-overlay"
+          />
+          <div className="absolute inset-0 bg-dotted-grid opacity-20 z-0"></div>
           <div className="relative z-10 max-w-[54rem] mx-auto text-center p-10 md:p-14">
             <div className="absolute top-0 left-0 w-6 h-6 border-t-[1.5px] border-l-[1.5px] border-brand-orange"></div>
             <div className="absolute top-0 right-0 w-6 h-6 border-t-[1.5px] border-r-[1.5px] border-brand-orange"></div>
